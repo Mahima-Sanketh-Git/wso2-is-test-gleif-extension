@@ -3,10 +3,6 @@ import Fastify from 'fastify'
 import fs from 'fs'
 const fastify = Fastify({
   logger: true,
-  https: {
-    key: fs.readFileSync('./server.key'),
-    cert: fs.readFileSync('./server.crt')
-  }
 })
 
 // Declare a route
@@ -50,7 +46,7 @@ fastify.post('/api/v1/lei-verification', async function handler (request, reply)
 
 // Run the server!
 try {
-  await fastify.listen({ port: 3000 })
+  await fastify.listen({ port: 3000 , host: '0.0.0.0'})
 } catch (err) {
   fastify.log.error(err)
   process.exit(1)
