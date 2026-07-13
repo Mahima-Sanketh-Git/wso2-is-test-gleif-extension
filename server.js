@@ -11,10 +11,21 @@ const fastify = Fastify({
 
 // Declare a route
 fastify.post('/api/v1/lei-verification', async function handler (request, reply) {
-    // console.log(request.body);
-    const response =  await fetch("https://api.gleif.org/api/v1/lei-records?filter[entity.legalName]=google&page[number]=1&page[size]=5")
+    console.log(request.body);
+    const response = await fetch("https://api.gleif.org/api/v1/lei-records/529900W18LQJJN6SJ336");
+
+    const data = await response.json();
+    console.log(data.data.attributes.registration.status);
+
+   if (data.data.attributes.registration.status === "ISSUED") {
     return {
-    "actionStatus": "SUCCESS",
+        "actionStatus": "SUCCESS",
+        "operations": []
+    }
+   }
+
+    return {
+    "actionStatus": "RETRY",
     "operations": []
     }
 
