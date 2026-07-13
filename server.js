@@ -11,11 +11,27 @@ const fastify = Fastify({
 
 // Declare a route
 fastify.post('/api/v1/lei-verification', async function handler (request, reply) {
-    console.log(request.body);
-    const response = await fetch("https://api.gleif.org/api/v1/lei-records/529900W18LQJJN6SJ336");
+    const {event} = request.body;
+
+    const claims = event.flow.user.claims
+    let lei;
+    for (const claim of claims){
+       if(claim.uri === ""){
+        lei = claim.value;
+       }
+    }
+
+    if(lei === undefined){
+        return {
+            "actionStatus": "FAILED",
+            "failureReason": "Organization LEI is not valid for account creation.",
+            "failureDescription": "Your Organization LEI is not valid for account creation. Please contact your Organization Administrator to update your Organization LEI."
+          }
+    }
+
+    const response = await fetch(`https://api.gleif.org/api/v1/lei-records/${lei}`);
 
     const data = await response.json();
-    console.log(data.data.attributes.registration.status);
 
    if (data.data.attributes.registration.status === "ISSUED") {
     return {
@@ -25,8 +41,9 @@ fastify.post('/api/v1/lei-verification', async function handler (request, reply)
    }
 
     return {
-    "actionStatus": "RETRY",
-    "operations": []
+      "actionStatus": "FAILED",
+      "failureReason": "Organization LEI is not valid for account creation.",
+      "failureDescription": "Your Organization LEI is not valid for account creation. Please contact your Organization Administrator to update your Organization LEI."
     }
 
 })
