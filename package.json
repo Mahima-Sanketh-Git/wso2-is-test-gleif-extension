@@ -1,0 +1,8 @@
+{
+  "name": "wso2_is_external_mock_server",
+  "version": "1.0.0",
+  "type": "module", 
+  "dependencies": {
+    "fastify": "^4.0.0"
+  }
+}
