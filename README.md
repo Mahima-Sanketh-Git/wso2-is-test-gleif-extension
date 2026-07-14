@@ -83,6 +83,11 @@ This repo is meant to be deployed as a **Service** component on
 > For the exact, up-to-date steps to create and configure a service component, follow the official
 > Choreo documentation: **[Develop a Service](https://wso2.com/choreo/docs/develop-components/develop-services/develop-a-service/)**.
 
+## Contributing
+
+Contributions are open and welcome! Feel free to open an issue or submit a pull request —
+whether it's fixing a bug, improving the docs, or extending the mock verification logic.
+
 ## Notes
 
 - `server.crt` / `server.key` are self-signed certs included for local TLS experiments; Choreo terminates TLS for you, so they are not required when deployed there.
