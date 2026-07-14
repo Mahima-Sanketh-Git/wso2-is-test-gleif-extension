@@ -9,6 +9,7 @@ const fastify = Fastify({
 fastify.post('/api/v1/lei-verification', async function handler (request, reply) {
     const {event} = request.body;
 
+    request.log.info({ body: request.body }, "Extracted LEI from claims");
     const claims = event.flow.user.claims
     let lei;
     for (const claim of claims){
@@ -17,6 +18,7 @@ fastify.post('/api/v1/lei-verification', async function handler (request, reply)
        }
     }
 
+    request.log.info({ capturedLei: lei }, "Extracted LEI from claims");
     if(lei === undefined){
         return {
             "actionStatus": "FAILED",
