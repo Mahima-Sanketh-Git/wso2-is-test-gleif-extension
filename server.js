@@ -12,7 +12,7 @@ fastify.post('/api/v1/lei-verification', async function handler (request, reply)
     const claims = event.flow.user.claims
     let lei;
     for (const claim of claims){
-       if(claim.uri === ""){
+       if(claim.uri === "http://wso2.org/claims/lei"){
         lei = claim.value;
        }
     }
