@@ -1,4 +1,4 @@
-# WSO2 IS External Mock Server — GLEIF LEI Verification
+# WSO2 IS External Mock Server - GLEIF LEI Verification
 
 A small [Fastify](https://fastify.dev/) service that acts as an **external mock endpoint** for testing the
 [WSO2 Identity Server](https://wso2.com/identity-server/) **Action / Extension** flow — specifically a
